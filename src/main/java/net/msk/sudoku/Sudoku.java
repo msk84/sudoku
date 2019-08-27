@@ -12,6 +12,14 @@ public class Sudoku {
 		this.sudoku = sudoku.clone();
 	}
 	
+	Integer getValue(final int index) {
+		return this.sudoku[index];
+	}
+	
+	void setValue(final int index, final Integer value) {
+		this.sudoku[index] = value;
+	}
+	
 	Row getRow(final int rowNumber) {
 		final Integer[] result = new Integer[9];
 		int j = 0;
@@ -67,6 +75,16 @@ public class Sudoku {
 		return true;
 	}
 	
+	boolean isValidCell(final int index) {
+		final int rowNumber = (index / 9) + 1;
+		final int colNumber = (index % 9) + 1;
+		final int fieldNumber = (((index % 9) / 3) + 1) + (3 * ((index / 27)));
+		
+		return this.isValidValueGroup(this.getRow(rowNumber)) &&
+				this.isValidValueGroup(this.getColumn(colNumber)) &&
+				this.isValidValueGroup(this.getField(fieldNumber));
+	}
+	
 	boolean isValid() {
 		for (int i = 1; i < 10; i++) {
 			if (!this.isValidValueGroup(this.getColumn(i)) ||
@@ -77,5 +95,14 @@ public class Sudoku {
 		}
 		
 		return true;
+	}
+	
+	boolean isComplete() {
+		for (final Integer currentValue : this.sudoku) {
+			if (currentValue == null) {
+				return false;
+			}
+		}
+		return this.isValid();
 	}
 }
