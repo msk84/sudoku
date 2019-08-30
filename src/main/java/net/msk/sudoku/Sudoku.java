@@ -1,5 +1,9 @@
 package net.msk.sudoku;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Sudoku {
 	
 	private Integer[] sudoku;
@@ -65,11 +69,14 @@ public class Sudoku {
 		final boolean[] checkValues = new boolean[9];
 		
 		for (final Integer value : valueGroup.getValues()) {
-			if (checkValues[value - 1]) {
-				return false;
+			if (value == null) {
+				continue;
+			}
+			else if (!checkValues[value - 1]) {
+				checkValues[value - 1] = true;
 			}
 			else {
-				checkValues[value - 1] = true;
+				return false;
 			}
 		}
 		return true;
@@ -104,5 +111,42 @@ public class Sudoku {
 			}
 		}
 		return this.isValid();
+	}
+	
+	void print() {
+		System.out.println(" " + String.join(" | ", this.getRow(1).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(2).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(3).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(4).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(5).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(6).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(7).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(8).toStringArray()));
+		System.out.println("-------------------------------------");
+		System.out.println(" " + String.join(" | ", this.getRow(9).toStringArray()));
+	}
+	
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || this.getClass() != o.getClass()) {
+			return false;
+		}
+		final Sudoku sudoku1 = (Sudoku) o;
+		return Arrays.equals(this.sudoku, sudoku1.sudoku);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(this.sudoku);
 	}
 }

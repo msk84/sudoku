@@ -18,6 +18,12 @@ public class ValueGroup {
 		return this.values.clone();
 	}
 	
+	String[] toStringArray() {
+		return Arrays.stream(this.values)
+				.map(String::valueOf)
+				.toArray(String[]::new);
+	}
+	
 	@Override
 	public boolean equals(final Object o) {
 		if (this == o) {
