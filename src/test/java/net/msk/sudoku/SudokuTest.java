@@ -1,11 +1,9 @@
 package net.msk.sudoku;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuTest {
 
@@ -13,7 +11,7 @@ public class SudokuTest {
 	private Sudoku sudokuValid;
 	private Sudoku sudokuValidIncomplete;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		final Integer[] sudokuInvalid = {
 				1,2,3,4,5,6,7,8,9,
